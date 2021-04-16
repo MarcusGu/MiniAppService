@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marcus.dao.UserMapper">
+
+    <select id="queryAllUser" resultType="com.marcus.entity.po.User">
+        select *
+        from user
+    </select>
+
+    <select id="queryUserById" parameterType="String" resultType="com.marcus.entity.po.User">
+        select *
+        from user
+        where id = #{id}
+    </select>
+
+    <select id="queryUserByUserName" parameterType="String" resultType="com.marcus.entity.po.User">
+        select *
+        from user
+        where username = #{username}
+    </select>
+
+    <select id="queryUserByMobile" parameterType="String" resultType="com.marcus.entity.po.User">
+        select *
+        from user
+        where mobile = #{id}
+    </select>
+
+    <select id="queryUserByOpenid" parameterType="String" resultType="com.marcus.entity.po.User">
+        select *
+        from user
+        where openid = #{openid}
+    </select>
+
+    <insert id="insertUser" parameterType="com.marcus.entity.po.User">
+        insert into users(username, password, gender, birthday, nickname, mobile, email, address, avatar, openid,
+                          session_key, status, create_time, update_time, last_login_time, last_login_ip)
+        values (#{username}, #{password}, #{gender}, #{birthday}, #{nickname}, #{mobile}, #{email}, #{address},
+                #{avatar}, #{openid},
+                #{sessionKey}, #{status}, #{createTime}, #{updateTime}, #{lastLoginTime}, #{lastLoginIp})
+    </insert>
+
+    <update id="updateUser" parameterType="com.marcus.entity.po.User">
+        update user
+        set username        = #{username},
+            password        = #{password},
+            gender          = #{gender},
+            birthday        = #{birthday},
+            nickname        = #{nickname},
+            mobile          = #{mobile},
+            email           = #{email},
+            address         = #{address},
+            avatar          = #{avatar},
+            openid          = #{openid},
+            session_key     = #{sessionKey},
+            status          = #{status},
+            create_time     = #{createTime},
+            update_time     = #{updateTime},
+            last_login_time = #{lastLoginTime},
+            last_login_ip   = #{lastLoginIp}
+        where id = #{id}
+    </update>
+
+    <update id="updateUsers" parameterType="java.util.List">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="username = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.username != null">
+                        when id=#{item.id} then #{item.username}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="password = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.password != null">
+                        when id=#{item.id} then #{item.password}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="gender = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.gender != null">
+                        when id=#{item.id} then #{item.gender}
+                    </if>
+                </foreach>
+            </trim>
+
+            <trim prefix="birthday = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.birthday != null">
+                        when id=#{item.id} then #{item.birthday}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="nickname = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.nickname != null">
+                        when id=#{item.id} then #{item.nickname}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="mobile = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.mobile != null">
+                        when id=#{item.id} then #{item.mobile}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="email = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.email != null">
+                        when id=#{item.id} then #{item.email}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="address = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.address != null">
+                        when id=#{item.id} then #{item.address}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="avatar = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.avatar != null">
+                        when id=#{item.id} then #{item.avatar}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="openid = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.openid != null">
+                        when id=#{item.id} then #{item.openid}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="session_key = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.session_key != null">
+                        when id=#{item.id} then #{item.sessionKey}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="status = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.status != null">
+                        when id=#{item.id} then #{item.status}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.create_time != null">
+                        when id=#{item.id} then #{item.createTime}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.update_time != null">
+                        when id=#{item.id} then #{item.updateTime}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="last_login_time = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.last_login_time != null">
+                        when id=#{item.id} then #{item.lastLoginTime}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="last_login_ip = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.last_login_ip != null">
+                        when id=#{item.id} then #{item.lastLoginIp}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+
+</mapper>

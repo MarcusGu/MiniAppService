@@ -1,0 +1,31 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.1'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+
+group 'com.marcus'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.4.1'
+    implementation 'org.springframework.boot:spring-boot-starter:2.4.1'
+    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '10.0.0'
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.1.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation project(":mini-common")
+    implementation project(":mini-entity")
+    implementation project(":mini-service")
+}
+
+test {
+    useJUnitPlatform()
+}

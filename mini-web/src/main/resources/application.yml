@@ -1,0 +1,7 @@
+spring:
+  servlet:
+    multipart:
+      location: localhost
+  profiles:
+    active: dao
+
